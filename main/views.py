@@ -1,26 +1,28 @@
 import json
-from datetime import datetime
+from datetime import datetime, timedelta
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
 
-from .models import Fee, CommunityPost, Convenient, Comment, Board, Parking
+from .models import Fee, CommunityPost, Convenient, Comment, Board, Parking, Calender
 
 class Plans:
     def __init__(self, date, title):
         self.date = date
         self.content = title
 
+week = ['월','화','수','목','금','토','일']
+
 def index(request):
     if not request.user.is_authenticated:
         return redirect('/')
     return render(request, 'index.html', {'plans': [
-        ((Calender.date-timedelta(days=3),week[r-3]), '후라이드'), 
-        ((Calender.date-timedelta(days=2),week[r-2]), '양념'), 
-        ((Calender.date-timedelta(days=1),week[r-1]), '간장'), 
-        ((Calender.date,week[r]), '뿌링클'),
-        ((Calender.date+timedelta(days=1),week[r-6]), '굽네'), 
-        ((Calender.date+timedelta(days=2),week[r-5]), '지코바'), 
-        ((Calender.date+timedelta(days=1),week[r-4]), '눈꽃치즈')
+        ((Calender.date-timedelta(days=1),week[0]), '후라이드'), 
+        ((Calender.date,week[1]), '양념'), 
+        ((Calender.date+timedelta(days=1),week[2]), '간장'), 
+        ((Calender.date+timedelta(days=2),week[3]), '뿌링클'),
+        ((Calender.date+timedelta(days=3),week[4]), '굽네'), 
+        ((Calender.date+timedelta(days=4),week[5]), '지코바'), 
+        ((Calender.date+timedelta(days=5),week[6]), '눈꽃치즈')
     ], 'notices': CommunityPost.objects.filter(board=1).order_by('-date')[:5]})
 def graph(request, time, kind):
     if not request.user.is_authenticated:
