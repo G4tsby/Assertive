@@ -5,11 +5,11 @@ from django.contrib.auth.models import AbstractUser
 
 #main date
 class Calender(models.Model):
-    date = models.DateTimeField()
+    date = models.forms.DateField(input_formats=['%Y/%m/%d'])
     schedule = models.CharField(max_length=30)
 
 class User(AbstractUser):
-    car = models.CharField(max_length=8, null=True)
+    car = models.CharField(max_length=8)
     phone = models.CharField(max_length=11)
 
 class park(models.Model):
@@ -19,7 +19,7 @@ class Car(models.Model):
     type = models.CharField(max_length=50)
     visitor = models.BooleanField()
 
-#convenience0
+#convenience
 class Convenient(models.Model):
     title = models.CharField(max_length=50)
     time = models.CharField(max_length=50)
@@ -42,7 +42,7 @@ class CCTV(models.Model):
     address = models.CharField(max_length=100)
     floor = models.IntegerField()
 
-class SecurityTodo(models.Model):
+class security_todo(models.Model):
     date = models.DateTimeField()
     deadline = models.DateTimeField()
     title = models.CharField(max_length = 20)
@@ -70,6 +70,7 @@ class CommunityPost(Post):
 class Comment(Post):
     post = models.ForeignKey(CommunityPost, on_delete=models.CASCADE)
 
+
 class complaints(Post):
     category = models.CharField(max_length=20)
 
@@ -80,7 +81,4 @@ class Notification(models.Model):
     title = models.CharField(max_length=20)
     contents = models.TextField()
 
-class Parking(models.Model):
-    floor = models.IntegerField()
-    status = models.TextField()
-    space = models.IntegerField()
+#complaints
