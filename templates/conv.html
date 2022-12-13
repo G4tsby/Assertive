@@ -6,10 +6,12 @@
     <link rel="stylesheet" href="{% static 'main/conv.css'%}">
 </head>
 <body>
+    <div id="headi"><!-- 상단바 고정 -->
+        <div class="div1" onclick="location.href='/main'"> 메인화면 이동</div>
+    </div>
+    
     <div class="div">
-        <div class="cov">
-            <h2>편의시설</h2>
-        </div>
+        
                 
         {% for content in contents %}
             
