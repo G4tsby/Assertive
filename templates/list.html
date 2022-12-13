@@ -41,7 +41,7 @@
         {% else %}
         <p>빈 공간 입니다.</p>
         {% endif %}
-        {% if board_type.id == 1 and user.is_superuser or board_type != 1 %}
+        {% if board_type != 1 %}
         <div class="bt_wrap">
             <a href="/main/board/write/{{ board_type.id }}" class="on">등록</a>
         </div>
