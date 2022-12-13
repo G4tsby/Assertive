@@ -48,7 +48,7 @@ def graph(request, time, kind):
 
 
 def board_list(request, board_id):
-    if not request.user.is_authenticated or (board_id == 3: and not request.user.is_superuser):
+    if not request.user.is_authenticated or (board_id == 3 and not request.user.is_superuser):
         return redirect('/')
     return render(request, 'list.html', {
         'board_list': CommunityPost.objects.filter(board=board_id).order_by('-date'),
